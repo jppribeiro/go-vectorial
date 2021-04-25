@@ -20,11 +20,11 @@ import "github.com/jppribeiro/go-vectorial/vec3"
 
 // Create a new 3D vector with coordinates (i,j,k)=(1,1,1)
 // The package is implemented with the notation (i,j,k) but you can think in terms of (x,y,z)
-v1 := vec3.Vec3{1,1,1}
+v1 := &vec3.Vec3{1,1,1}
 
 fmt.Println(*v) // {1,1,1}
 
-v2 := vec3.Vec3{1,1,1}
+v2 := &vec3.Vec3{1,1,1}
 
 // To calculate a unit vector we have two alternatives
 
@@ -32,7 +32,7 @@ v1.Unit() // transforms v1 into a unit vector
 
 v3 := vec3.Unit(*v2) // Create a new unit vector from an existing vector
 
-fmt.Printf("v1: %v, v2: %v, v3: %v")
+fmt.Printf("v1: %v, v2: %v, v3: %v", *v1, *v2, *v3)
 
 // v1: {0.577, 0.577, 0.577}, v2: {1, 1, 1}, v3: {0.577, 0.577, 0.577}
 
@@ -43,7 +43,7 @@ Almost all calculations have these two alternatives.
 To get the value of a specific coordinate:
 
 ```go
-v1 := vec3.Vec3{I: 1, J: 2, K: 3}
+v1 := &vec3.Vec3{I: 1, J: 2, K: 3}
 
 j := v1.J
 

@@ -10,6 +10,10 @@ type Vec2 struct {
 	J float64
 }
 
+func New(i float64, j float64) *Vec2 {
+	return &Vec2{i, j}
+}
+
 // Add takes a Vec2 transforming v1 by adding their dimensions
 func (v1 *Vec2) Add(v2 Vec2) {
 	v1.I += v2.I
