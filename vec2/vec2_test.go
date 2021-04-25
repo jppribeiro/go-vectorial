@@ -232,3 +232,36 @@ func Test_Vec2_Unit(t *testing.T) {
 		})
 	}
 }
+
+func TestVec2_Angle(t *testing.T) {
+	type fields struct {
+		I float64
+		J float64
+	}
+	type args struct {
+		v2 Vec2
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   float64
+	}{
+		{"{1,0}^{0,4} -> expect pi/2", fields{1, 0}, args{Vec2{0, 4}}, math.Pi / 2},
+		{"{2,0}^{1,0} -> expect 0", fields{2, 0}, args{Vec2{1, 0}}, 0},
+		{"{1,0}^{-2,0} -> expect 0", fields{1, 0}, args{Vec2{-2, 0}}, math.Pi},
+		{"{1,0}^{-0.707.., -0.707..} -> expect 3*pi/4", fields{1, 0}, args{Vec2{-math.Sqrt(2) / 2, -math.Sqrt(2) / 2}}, 3 * math.Pi / 4},
+		{"{1,0}^{-0.707.., 0.707..} -> expect 3*pi/4", fields{1, 0}, args{Vec2{-math.Sqrt(2) / 2, math.Sqrt(2) / 2}}, 3 * math.Pi / 4},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			v1 := &Vec2{
+				I: tt.fields.I,
+				J: tt.fields.J,
+			}
+			if got := v1.Angle(tt.args.v2); got != tt.want {
+				t.Errorf("Vec2.Angle() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

@@ -113,3 +113,13 @@ func Unit(v Vec2) *Vec2 {
 
 	return &Vec2{v.I / m, v.J / m}
 }
+
+// Angle takes a Vec2 and calculates the angle (in radians) between two vectors
+func (v1 Vec2) Angle(v2 Vec2) float64 {
+	return Angle(v1, v2)
+}
+
+// Angle takes two Vec2 ant calculates the angle (in radians) between them
+func Angle(v1 Vec2, v2 Vec2) float64 {
+	return math.Acos(Dot(v1, v2) / (Magnitude(v1) * Magnitude(v2)))
+}
