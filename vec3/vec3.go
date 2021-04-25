@@ -135,6 +135,7 @@ func (v1 Vec3) Angle(v2 Vec3) float64 {
 	return Angle(v1, v2)
 }
 
+// Angle takes two Vec2 ant calculates the angle (in radians) between them
 func Angle(v1 Vec3, v2 Vec3) float64 {
 	return math.Acos(Dot(v1, v2) / (Magnitude(v1) * Magnitude(v2)))
 }
