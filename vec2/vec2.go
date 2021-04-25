@@ -10,6 +10,7 @@ type Vec2 struct {
 	J float64
 }
 
+// New returns a nre vec2 pointer
 func New(i float64, j float64) *Vec2 {
 	return &Vec2{i, j}
 }
