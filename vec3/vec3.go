@@ -11,6 +11,11 @@ type Vec3 struct {
 	K float64
 }
 
+// New returns a new Vec3 pointer
+func New(i float64, j float64, k float64) *Vec3 {
+	return &Vec3{i, j, k}
+}
+
 // Add takes a vec3 transforming v1 by adding their dimensions
 func (v1 *Vec3) Add(v2 Vec3) {
 	v1.I += v2.I
