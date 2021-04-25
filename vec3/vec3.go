@@ -29,8 +29,8 @@ func Add(v1 Vec3, v2 Vec3) *Vec3 {
 }
 
 // Dot takes a vec3 and returns the dot product of the two vectors
-func (v1 *Vec3) Dot(v2 Vec3) float64 {
-	return Dot(*v1, v2)
+func (v1 Vec3) Dot(v2 Vec3) float64 {
+	return Dot(v1, v2)
 }
 
 // Dot takes two vec3 and returns the dot product of the two vec3
@@ -39,8 +39,8 @@ func Dot(v1 Vec3, v2 Vec3) float64 {
 }
 
 // Magnitude returns the magnitude of a vec3
-func (v1 *Vec3) Magnitude() float64 {
-	return Magnitude(*v1)
+func (v1 Vec3) Magnitude() float64 {
+	return Magnitude(v1)
 }
 
 // Magnitude takes a vec3 and returns its magnitude
@@ -128,4 +128,13 @@ func Unit(v Vec3) *Vec3 {
 	m := Magnitude(v)
 
 	return &Vec3{v.I / m, v.J / m, v.K / m}
+}
+
+// Angle calculates the angle between two vec3
+func (v1 Vec3) Angle(v2 Vec3) float64 {
+	return Angle(v1, v2)
+}
+
+func Angle(v1 Vec3, v2 Vec3) float64 {
+	return math.Acos(Dot(v1, v2) / (Magnitude(v1) * Magnitude(v2)))
 }
