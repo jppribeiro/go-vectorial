@@ -2,6 +2,8 @@ package vec2
 
 import (
 	"math"
+
+	"github.com/jppribeiro/go-vectorial/matrix2"
 )
 
 // Vec2 defines a 3-dimension vector
@@ -122,4 +124,27 @@ func (v1 Vec2) Angle(v2 Vec2) float64 {
 // Angle takes two Vec2 ant calculates the angle (in radians) between them
 func Angle(v1 Vec2, v2 Vec2) float64 {
 	return math.Acos(Dot(v1, v2) / (Magnitude(v1) * Magnitude(v2)))
+}
+
+// Rotate takes an angle in radians and rotates the vector
+// Note:	positive angle rotates counter-clockwise
+//				negative angle rotates clockwise
+func (v1 Vec2) Rotate(theta float64) {
+	rMatrix := matrix2.RotationMatrix(theta)
+
+	v1.I = rMatrix.M11*v1.I + rMatrix.M12*v1.J
+	v1.J = rMatrix.M21*v1.I + rMatrix.M22*v1.J
+}
+
+// Rotate takes a Vec2 and an angle in radians and returns a new vector
+// equal to the original vector, rotated by theta rads.
+// Note:	positive angle rotates counter-clockwise
+//				negative angle rotates clockwise
+func Rotate(v Vec2, theta float64) *Vec2 {
+	rMatrix := matrix2.RotationMatrix(theta)
+
+	return &Vec2{
+		rMatrix.M11*v.I + rMatrix.M12*v.J,
+		rMatrix.M21*v.I + rMatrix.M22*v.J,
+	}
 }

@@ -265,3 +265,57 @@ func TestVec2_Angle(t *testing.T) {
 		})
 	}
 }
+
+func TestVec2_Rotate(t *testing.T) {
+	type fields struct {
+		I float64
+		J float64
+	}
+	type args struct {
+		theta float64
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			v1 := Vec2{
+				I: tt.fields.I,
+				J: tt.fields.J,
+			}
+			v1.Rotate(tt.args.theta)
+		})
+	}
+}
+
+func TestRotate(t *testing.T) {
+	type args struct {
+		v     Vec2
+		theta float64
+	}
+	tests := []struct {
+		name string
+		args args
+		want *Vec2
+	}{
+		{"theta = 0 -> no rotation", args{Vec2{1, 0}, 0}, &Vec2{1, 0}},
+		{"theta = Pi/2 -> rotate 90º", args{Vec2{1, 0}, math.Pi / 2}, &Vec2{0, 1}},
+		{"theta = Pi -> rotate 180º", args{Vec2{1, 0}, math.Pi}, &Vec2{-1, 0}},
+		{"theta = -Pi/2 -> rotate -90º", args{Vec2{1, 0}, -math.Pi / 2}, &Vec2{0, -1}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := Rotate(tt.args.v, tt.args.theta)
+
+			i := int(math.Round(got.I))
+			j := int(math.Round(got.J))
+			if float64(i) != tt.want.I || float64(j) != tt.want.J {
+				t.Errorf("Rotate() = %v, %v, want %v", i, j, tt.want)
+			}
+		})
+	}
+}
