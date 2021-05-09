@@ -55,7 +55,7 @@ Rotate a 2D vector by Pi/2 (90º)
 
 v := &vec.Vec2{2, 0}
 
-v.Rotate(math.Pi/4)
+v.Rotate(math.Pi/2)
 
 fmt.Printf("%v", *v)
 
